@@ -1,0 +1,1 @@
+define(["react","components/FleetFilterColor","components/FleetFilterMark"],function(e,n,r){"use strict";var l=function(){var l={};return l.render=function(){return e.DOM.div({className:"col-md-3 well"},e.DOM.h4(null,"Cor"),n(null),e.DOM.h4(null,"Marca"),r(null))},l};return e.createClass(l())});

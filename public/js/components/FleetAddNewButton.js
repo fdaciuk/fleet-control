@@ -1,0 +1,1 @@
+define(["react"],function(n){"use strict";var e=function(){var e={};return e.render=function(){return n.DOM.div({className:"col-md-12"},n.DOM.a({href:"#",className:"btn btn-success pull-right"},n.DOM.span({className:"glyphicon glyphicon-plus"})," Adicionar"))},e};return n.createClass(e())});

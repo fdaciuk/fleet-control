@@ -1,0 +1,1 @@
+define(["react","components/FleetFilter","components/FleetList"],function(e,n,t){"use strict";var r=function(){var r={};return r.render=function(){return e.DOM.div({className:"row"},n(null),t(null))},r};return e.createClass(r())});

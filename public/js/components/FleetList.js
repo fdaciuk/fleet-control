@@ -1,0 +1,1 @@
+define(["react","components/FleetAddNewButton","components/FleetForm","components/FleetListTable","components/FleetPagination"],function(e,n,t,l,o){"use strict";var c=function(){var c={};return c.render=function(){return e.DOM.div({className:"col-md-9"},n(null),t(null),e.DOM.div({className:"col-md-12"},l(null),o(null)))},c};return e.createClass(c())});

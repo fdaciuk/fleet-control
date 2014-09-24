@@ -1,0 +1,1 @@
+define(["react"],function(e){"use strict";var r=function(){var r={};return r.render=function(){return e.DOM.div({role:"header",className:"page-header"},e.DOM.h1(null,"Controle de Frotas"))},r};return e.createClass(r())});

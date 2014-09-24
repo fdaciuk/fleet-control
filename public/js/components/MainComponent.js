@@ -1,0 +1,1 @@
+define(["react","components/FleetMainContainer"],function(e,n){"use strict";e.renderComponent(n(null),document.querySelector('[data-js="main"]'))});
