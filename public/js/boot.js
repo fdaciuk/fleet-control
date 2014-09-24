@@ -1,0 +1,1 @@
+!function(e){"use strict";var n=function(){var n=e.location.href;return n.indexOf("index.html")>-1?n.split("/index.html").join(""):"."};requirejs.config({baseUrl:n()+"/public/js",paths:{react:"vendor/react"}}),requirejs(["react","remove-console-log"],function(){requirejs(["components/MainComponent"])})}(window,document);

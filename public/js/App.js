@@ -1,0 +1,1 @@
+define(["backbone"],function(){"use strict";var n=function(){var n={},o={};return n.init=function(){console.log("carregou App.js"),o.initRouter()},o.initRouter=function(){console.log("init router")},n}();return n});
