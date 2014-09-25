@@ -15,8 +15,8 @@ function( React ) {
         $public.render = function render() {
             return (
                 <table className="table table-striped">
-                    <thead><tr><th colspan="2"></th></tr></thead>
-                    <tfoot><tr><th colspan="2"></th></tr></tfoot>
+                    <thead><tr><th colSpan="2"></th></tr></thead>
+                    <tfoot><tr><td colSpan="2"></td></tr></tfoot>
 
                     <tbody>
                         {this.props.data.map( $private.createItem )}

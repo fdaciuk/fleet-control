@@ -19,7 +19,7 @@ function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination )
         $public.getInitialState = function getInitialState() {
             return {
                 formShowOrHide : 'hide'
-            }
+            };
         };
 
         // ------------------------------
@@ -31,7 +31,9 @@ function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination )
                         formShowOrHide={this.state.formShowOrHide}
                         onFormShowOrHide={$private.handleFormShowOrHide.bind( this )} />
 
-                    <FleetForm showOrHide={this.state.formShowOrHide} />
+                    <FleetForm
+                        showOrHide={this.state.formShowOrHide}
+                        onAddNewVehicle={$private.handleAddNewVehicle.bind( this )} />
 
                     <div className="col-md-12">
                         <FleetListTable data={this.props.data} />
@@ -47,6 +49,12 @@ function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination )
 
         $private.handleFormShowOrHide = function handleFormShowOrHide( cssClass ) {
             this.setState({ formShowOrHide : cssClass });
+        };
+
+        // ------------------------------
+
+        $private.handleAddNewVehicle = function handleAddNewVehicle( data ) {
+            this.props.updateData( data );
         };
 
         // ------------------------------

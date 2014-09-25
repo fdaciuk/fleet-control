@@ -12,14 +12,6 @@ function( React ) {
 
         // ------------------------------
 
-        $public.getInitialState = function getInitialState() {
-            return {
-                fields: []
-            };
-        };
-
-        // ------------------------------
-
         $public.render = function render() {
             return (
                 <div className={'col-md-12 ' + this.props.showOrHide}>
@@ -80,22 +72,34 @@ function( React ) {
             e.preventDefault();
             var fields = [ 'image', 'mark', 'model', 'plate', 'color', 'fuel' ];
             var fieldsAndValues = $private.getValue.call( this, fields );
+            var newVehicle = $private.createNewVehicle( fieldsAndValues );
 
-            this.setState({ fields : fieldsAndValues });
+            this.props.onAddNewVehicle( newVehicle );
         };
 
         // ------------------------------
 
         $private.getValue = function getValue( fields ) {
             var inputFields = [];
+
             for( var i = fields.length; i--; ) {
-                inputFields.push({
-                    name: fields[i],
-                    value : this.refs[ fields[i] ].getDOMNode().value
-                });
+                inputFields[ fields[i] ] = this.refs[ fields[i] ].getDOMNode().value;
             }
 
             return inputFields.reverse();
+        };
+
+        // ------------------------------
+
+        $private.createNewVehicle = function createNewVehicle( fieldsAndValues ) {
+            return {
+                combustivel : fieldsAndValues.fuel,
+                imagem : fieldsAndValues.image,
+                marca : fieldsAndValues.mark,
+                modelo : fieldsAndValues.model,
+                placa : fieldsAndValues.plate,
+                cor : fieldsAndValues.color
+            };
         };
 
         // ------------------------------

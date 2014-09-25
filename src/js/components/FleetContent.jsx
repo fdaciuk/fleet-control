@@ -12,15 +12,32 @@ function( React, FleetFilter, FleetList ) {
         var $public = {};
         var $private = {};
 
+        $public.getInitialState = function getInitialState() {
+            return {
+                newVehicle: []
+            };
+        };
+
         // ------------------------------
 
         $public.render = function render() {
+            var updatedData = this.props.data.concat( this.state.newVehicle );
+
             return (
                 <div className="row">
-                    <FleetFilter />
-                    <FleetList data={this.props.data} />
+                    <FleetFilter data={updatedData} />
+
+                    <FleetList
+                        data={updatedData}
+                        updateData={$private.updateData.bind( this )} />
                 </div>
             );
+        };
+
+        // ------------------------------
+
+        $private.updateData = function updateData( newVehicle ) {
+            this.setState({ newVehicle: newVehicle });
         };
 
         // ------------------------------
