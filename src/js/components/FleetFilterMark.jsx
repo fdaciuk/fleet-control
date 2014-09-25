@@ -22,7 +22,7 @@ function( React ) {
                         <input type="checkbox" checked /> Fiat
                     </label>
                     <label className="btn btn-info">
-                        <input type="checkbox" /> Vermelho
+                        <input type="checkbox" /> BMW
                     </label>
                 </div>
             );

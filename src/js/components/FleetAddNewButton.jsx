@@ -15,12 +15,19 @@ function( React ) {
         $public.render = function render() {
             return (
                 <div className="col-md-12">
-                    <a href="#" className="btn btn-success pull-right">
+                    <a onClick={$private.handleClickShowHideForm.bind( this )} className="btn btn-success pull-right">
                         <span className="glyphicon glyphicon-plus"></span>
-                        &nbsp;Adicionar
+                        &nbsp;Adicionar Veículo
                     </a>
                 </div>
             );
+        };
+
+        // ------------------------------
+
+        $private.handleClickShowHideForm = function handleClickShowHideForm() {
+            var cssClass = ! this.props.formShowOrHide ? 'hide' : '';
+            this.props.onFormShowOrHide( cssClass );
         };
 
         // ------------------------------

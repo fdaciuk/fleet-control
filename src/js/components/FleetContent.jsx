@@ -18,7 +18,7 @@ function( React, FleetFilter, FleetList ) {
             return (
                 <div className="row">
                     <FleetFilter />
-                    <FleetList />
+                    <FleetList data={this.props.data} />
                 </div>
             );
         };

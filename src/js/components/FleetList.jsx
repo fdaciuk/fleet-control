@@ -16,20 +16,37 @@ function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination )
 
         // ------------------------------
 
+        $public.getInitialState = function getInitialState() {
+            return {
+                formShowOrHide : 'hide'
+            }
+        };
+
+        // ------------------------------
+
         $public.render = function render() {
             return (
                 <div className="col-md-9">
-                    <FleetAddNewButton />
-                    <FleetForm />
+                    <FleetAddNewButton
+                        formShowOrHide={this.state.formShowOrHide}
+                        onFormShowOrHide={$private.handleFormShowOrHide.bind( this )} />
+
+                    <FleetForm showOrHide={this.state.formShowOrHide} />
 
                     <div className="col-md-12">
-                        <FleetListTable />
+                        <FleetListTable data={this.props.data} />
                         <FleetPagination />
                     </div>
 
 
                 </div>
             );
+        };
+
+        // ------------------------------
+
+        $private.handleFormShowOrHide = function handleFormShowOrHide( cssClass ) {
+            this.setState({ formShowOrHide : cssClass });
         };
 
         // ------------------------------

@@ -18,7 +18,7 @@ function( React, FleetHeader, FleetContent ) {
             return (
                 <div className="container">
                     <FleetHeader />
-                    <FleetContent />
+                    <FleetContent data={this.props.data} />
                 </div>
             );
         };

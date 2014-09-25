@@ -12,45 +12,53 @@ function( React ) {
 
         // ------------------------------
 
+        $public.getInitialState = function getInitialState() {
+            return {
+                fields: []
+            };
+        };
+
+        // ------------------------------
+
         $public.render = function render() {
             return (
-                <div className="col-md-12">
+                <div className={'col-md-12 ' + this.props.showOrHide}>
                     <h2>Cadastrar novo veículo</h2>
-                    <form action="" role="form">
+                    <form onSubmit={$private.handleSubmitForm.bind( this )} role="form">
                         <div className="form-group col-md-6">
                             <label for="">Imagem</label>
-                            <input type="url" className="form-control" />
+                            <input type="url" ref="image" className="form-control" />
                             <p className="help-block">URL da imagem do automóvel.</p>
                         </div>
 
                         <div className="form-group col-md-3">
                             <label for="">Marca *</label>
-                            <input type="text" required className="form-control" />
+                            <input type="text" required ref="mark" className="form-control" />
                             <p className="help-block">&nbsp;</p>
                         </div>
 
                         <div className="form-group col-md-3">
                             <label for="">Modelo *</label>
-                            <input type="text" required className="form-control" />
+                            <input type="text" required ref="model" className="form-control" />
                             <p className="help-block">&nbsp;</p>
                         </div>
 
                         <div className="form-group col-md-3">
                             <label for="">Placa *</label>
-                            <input type="text" required className="form-control" />
+                            <input type="text" required ref="plate" className="form-control" />
                         </div>
 
                         <div className="form-group col-md-3">
                             <label for="">Cor</label>
-                            <input type="text" className="form-control" />
+                            <input type="text" ref="color" className="form-control" />
                         </div>
 
                         <div className="form-group col-md-4">
                             <label for="">Combustível</label>
-                            <select className="form-control">
-                                <option value="">Gasolina</option>
-                                <option value="">Álcool</option>
-                                <option value="">Flex</option>
+                            <select ref="fuel" className="form-control">
+                                <option value="Gasolina">Gasolina</option>
+                                <option value="Alcool">Álcool</option>
+                                <option value="Flex">Flex</option>
                             </select>
                         </div>
 
@@ -64,6 +72,30 @@ function( React ) {
                     </form>
                 </div>
             );
+        };
+
+        // ------------------------------
+
+        $private.handleSubmitForm = function handleSubmitForm( e ) {
+            e.preventDefault();
+            var fields = [ 'image', 'mark', 'model', 'plate', 'color', 'fuel' ];
+            var fieldsAndValues = $private.getValue.call( this, fields );
+
+            this.setState({ fields : fieldsAndValues });
+        };
+
+        // ------------------------------
+
+        $private.getValue = function getValue( fields ) {
+            var inputFields = [];
+            for( var i = fields.length; i--; ) {
+                inputFields.push({
+                    name: fields[i],
+                    value : this.refs[ fields[i] ].getDOMNode().value
+                });
+            }
+
+            return inputFields.reverse();
         };
 
         // ------------------------------

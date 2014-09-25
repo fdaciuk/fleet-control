@@ -2,13 +2,14 @@
 
 define([
     'react',
-    'components/FleetMainContainer'
+    'components/FleetMainContainer',
+    'data/fleet-data'
 ],
-function( React, FleetMainContainer ) {
+function( React, FleetMainContainer, data ) {
     'use strict';
 
     React.renderComponent(
-        <FleetMainContainer />,
+        <FleetMainContainer data={data} />,
         document.querySelector( '[data-js="main"]' )
     );
 });
