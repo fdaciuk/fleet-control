@@ -14,7 +14,17 @@
     requirejs.config({
         baseUrl : getLocation() + '/public/js',
         paths : {
-            'react' : 'vendor/react'
+            'react' : [
+                '//fb.me/react-0.11.2',
+                'vendor/react'
+            ],
+            'lodash' : 'vendor/lodash.compat.min'
+        },
+
+        shim : {
+            'lodash' : {
+                exports : '_'
+            }
         }
     });
 

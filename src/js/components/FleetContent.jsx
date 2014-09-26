@@ -2,34 +2,37 @@
 
 define([
     'react',
+    'lodash',
     'components/FleetFilter',
     'components/FleetList'
 ],
-function( React, FleetFilter, FleetList ) {
+function( React, _, FleetFilter, FleetList ) {
     'use strict';
 
     var FleetContent = function() {
         var $public = {};
         var $private = {};
 
+        // ------------------------------
+
         $public.getInitialState = function getInitialState() {
             return {
-                newVehicle: []
+                data: this.props.data.reverse()
             };
         };
 
         // ------------------------------
 
         $public.render = function render() {
-            var updatedData = this.props.data.concat( this.state.newVehicle );
+            var updatedData = this.state.data;
 
             return (
                 <div className="row">
-                    <FleetFilter data={updatedData} />
+                    <FleetFilter data={ updatedData } />
 
                     <FleetList
-                        data={updatedData}
-                        updateData={$private.updateData.bind( this )} />
+                        data={ updatedData }
+                        updateData={ _.bind( $private.updateData, this ) } />
                 </div>
             );
         };
@@ -37,7 +40,13 @@ function( React, FleetFilter, FleetList ) {
         // ------------------------------
 
         $private.updateData = function updateData( newVehicle ) {
-            this.setState({ newVehicle: newVehicle });
+            var removeToUpdate = _.remove( this.state.data, function( data ) {
+                return data.placa === newVehicle.placa;
+            });
+
+            this.setState({
+                data: [].concat( newVehicle, this.state.data )
+            });
         };
 
         // ------------------------------

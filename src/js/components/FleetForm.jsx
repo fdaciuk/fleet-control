@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 
 define([
-    'react'
+    'react',
+    'lodash'
 ],
-function( React ) {
+function( React, _ ) {
     'use strict';
 
     var FleetForm = function() {
@@ -13,43 +14,45 @@ function( React ) {
         // ------------------------------
 
         $public.render = function render() {
+            var editItemData = this.props.itemToEdit || {};
+
             return (
                 <div className={'col-md-12 ' + this.props.showOrHide}>
                     <h2>Cadastrar novo veículo</h2>
-                    <form onSubmit={$private.handleSubmitForm.bind( this )} role="form">
+                    <form onSubmit={ _.bind( $private.handleSubmitForm, this ) } role="form" class="form-vehicle">
                         <div className="form-group col-md-6">
-                            <label for="">Imagem</label>
-                            <input type="url" ref="image" className="form-control" />
+                            <label htmlFor="fv-image">Imagem</label>
+                            <input type="url" ref="image" id="fv-image" defaultValue={ editItemData.imagem } className="form-control" />
                             <p className="help-block">URL da imagem do automóvel.</p>
                         </div>
 
                         <div className="form-group col-md-3">
-                            <label for="">Marca *</label>
-                            <input type="text" required ref="mark" className="form-control" />
+                            <label htmlFor="fv-mark">Marca *</label>
+                            <input type="text" required ref="mark" id="fv-mark" defaultValue={ editItemData.marca } className="form-control" />
                             <p className="help-block">&nbsp;</p>
                         </div>
 
                         <div className="form-group col-md-3">
-                            <label for="">Modelo *</label>
-                            <input type="text" required ref="model" className="form-control" />
+                            <label htmlFor="fv-model">Modelo *</label>
+                            <input type="text" required ref="model" id="fv-model" defaultValue={ editItemData.modelo } className="form-control" />
                             <p className="help-block">&nbsp;</p>
                         </div>
 
                         <div className="form-group col-md-3">
-                            <label for="">Placa *</label>
-                            <input type="text" required ref="plate" className="form-control" />
+                            <label htmlFor="fv-plate">Placa *</label>
+                            <input type="text" required ref="plate" id="fv-plate" defaultValue={ editItemData.placa } className="form-control" />
                         </div>
 
                         <div className="form-group col-md-3">
-                            <label for="">Cor</label>
-                            <input type="text" ref="color" className="form-control" />
+                            <label htmlFor="fv-color">Cor</label>
+                            <input type="text" ref="color" id="fv-color" defaultValue={ editItemData.cor } className="form-control" />
                         </div>
 
                         <div className="form-group col-md-4">
-                            <label for="">Combustível</label>
-                            <select ref="fuel" className="form-control">
+                            <label htmlFor="fv-fuel">Combustível</label>
+                            <select ref="fuel" id="fv-fuel" defaultValue={ editItemData.combustivel } className="form-control">
                                 <option value="Gasolina">Gasolina</option>
-                                <option value="Alcool">Álcool</option>
+                                <option value="Alcool">Alcool</option>
                                 <option value="Flex">Flex</option>
                             </select>
                         </div>

@@ -9,7 +9,7 @@ function( React, FleetMainContainer, data ) {
     'use strict';
 
     React.renderComponent(
-        <FleetMainContainer data={data} />,
+        <FleetMainContainer data={ data } />,
         document.querySelector( '[data-js="main"]' )
     );
 });

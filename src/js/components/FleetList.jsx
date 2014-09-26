@@ -2,12 +2,13 @@
 
 define([
     'react',
+    'lodash',
     'components/FleetAddNewButton',
     'components/FleetForm',
     'components/FleetListTable',
     'components/FleetPagination'
 ],
-function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination ) {
+function( React, _, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination ) {
     'use strict';
 
     var FleetList = function() {
@@ -18,29 +19,39 @@ function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination )
 
         $public.getInitialState = function getInitialState() {
             return {
-                formShowOrHide : 'hide'
+                formShowOrHide : 'hide',
+                itemToEdit : ''
             };
         };
 
         // ------------------------------
 
         $public.render = function render() {
+            var formShowOrHide = this.state.formShowOrHide;
+            var itemEdit = this.state.itemEdit;
+
             return (
                 <div className="col-md-9">
                     <FleetAddNewButton
-                        formShowOrHide={this.state.formShowOrHide}
-                        onFormShowOrHide={$private.handleFormShowOrHide.bind( this )} />
+                        formShowOrHide={ formShowOrHide }
+                        onFormShowOrHide={ _.bind( $private.handleFormShowOrHide, this ) } />
 
                     <FleetForm
-                        showOrHide={this.state.formShowOrHide}
-                        onAddNewVehicle={$private.handleAddNewVehicle.bind( this )} />
+                        showOrHide={ formShowOrHide }
+                        itemToEdit={ itemEdit }
+                        onAddNewVehicle={ _.bind( $private.handleAddNewVehicle, this ) } />
 
                     <div className="col-md-12">
-                        <FleetListTable data={this.props.data} />
-                        <FleetPagination />
+                        <FleetListTable
+                            data={ this.props.data }
+                            onRemoveItem={ _.bind( $private.handleRemoveItem, this ) }
+                            onEditItem={ _.bind( $private.handleEditItem, this ) } />
+
+                        {/*
+                        <FleetPagination
+                            data={ this.props.data } />
+                        */}
                     </div>
-
-
                 </div>
             );
         };
@@ -55,6 +66,21 @@ function( React, FleetAddNewButton, FleetForm, FleetListTable, FleetPagination )
 
         $private.handleAddNewVehicle = function handleAddNewVehicle( data ) {
             this.props.updateData( data );
+        };
+
+        // ------------------------------
+
+        $private.handleRemoveItem = function handleRemoveItem( data ) {
+
+        };
+
+        // ------------------------------
+
+        $private.handleEditItem = function handleEditItem( item ) {
+            this.setState({
+                formShowOrHide : '',
+                itemEdit : item[0]
+            });
         };
 
         // ------------------------------

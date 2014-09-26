@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 
 define([
-    'react'
+    'react',
+    'lodash'
 ],
-function( React ) {
+function( React, _ ) {
     'use strict';
 
     var FleetListTable = function() {
@@ -19,7 +20,7 @@ function( React ) {
                     <tfoot><tr><td colSpan="2"></td></tr></tfoot>
 
                     <tbody>
-                        {this.props.data.map( $private.createItem )}
+                        { _.map( this.props.data, _.bind( $private.createItem, this ) ) }
                     </tbody>
                 </table>
             );
@@ -50,16 +51,50 @@ function( React ) {
                     </td>
 
                     <td className="text-right">
-                        <a href="" className="btn btn-primary">
-                            <span className="glyphicon glyphicon-pencil"></span>
-                        </a>
+                        <a
+                            href="#"
+                            onClick={ _.bind( $private.handleClickEdit, this ) }
+                            data-plate={ itemData.placa }
+                            className="btn btn-primary"
+                        ><span className="glyphicon glyphicon-pencil"></span></a>
+
                         &nbsp;
-                        <a href="" className="btn btn-danger">
-                            <span className="glyphicon glyphicon-remove"></span>
-                        </a>
+
+                        <a
+                            href="#"
+                            onClick={ _.bind( $private.handleClickRemove, this ) }
+                            data-plate={ itemData.placa }
+                            className="btn btn-danger"
+                        ><span className="glyphicon glyphicon-remove"></span></a>
                     </td>
                 </tr>
             );
+        };
+
+        // ------------------------------
+
+        $private.handleClickEdit = function handleClickEdit( e ) {
+            e.preventDefault();
+            var plate = e.currentTarget.getAttribute( 'data-plate' );
+            var editItem = _.filter( this.props.data, function( item ) {
+                return item.placa === plate;
+            });
+
+            console.log( 'Edit car %s', plate );
+            this.props.onEditItem( editItem );
+        };
+
+        // ------------------------------
+
+        $private.handleClickRemove = function handleClickRemove( e ) {
+            e.preventDefault();
+            var plate = e.currentTarget.getAttribute( 'data-plate' );
+            var newData = _.filter( this.props.data, function( item ) {
+                return item.placa !== plate;
+            });
+
+            console.log( 'Removed plate %s', plate, newData );
+            return newData;
         };
 
         // ------------------------------
