@@ -1,1 +1,1 @@
-define(["react","components/FleetMainContainer","data/fleet-data"],function(e,t,n){"use strict";e.renderComponent(t({data:n}),document.querySelector('[data-js="main"]'))});
+define(["react","components/FleetMainContainer","data/InitialData"],function(n,e,t){"use strict";t.init(),n.renderComponent(e(null),document.querySelector('[data-js="main"]'))});

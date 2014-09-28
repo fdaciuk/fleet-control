@@ -3,13 +3,15 @@
 define([
     'react',
     'components/FleetMainContainer',
-    'data/fleet-data'
+    'data/InitialData'
 ],
-function( React, FleetMainContainer, data ) {
+function( React, FleetMainContainer, InitialData ) {
     'use strict';
 
+    InitialData.init();
+
     React.renderComponent(
-        <FleetMainContainer data={ data } />,
+        <FleetMainContainer />,
         document.querySelector( '[data-js="main"]' )
     );
 });

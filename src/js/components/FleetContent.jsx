@@ -4,10 +4,13 @@ define([
     'react',
     'lodash',
     'components/FleetFilter',
-    'components/FleetList'
+    'components/FleetList',
+    'modules/Storage'
 ],
-function( React, _, FleetFilter, FleetList ) {
+function( React, _, FleetFilter, FleetList, Storage ) {
     'use strict';
+
+    // Storage.removeItem( 'fleet' );
 
     var FleetContent = function() {
         var $public = {};
@@ -17,8 +20,16 @@ function( React, _, FleetFilter, FleetList ) {
 
         $public.getInitialState = function getInitialState() {
             return {
-                data: this.props.data.reverse()
+                data: Storage.getItem( 'fleet' ).reverse()
             };
+        };
+
+        // ------------------------------
+
+        $public.componentDidUpdate = function componentDidUpdate( prevProps, prevState ) {
+            // console.log( 'COMPONENT DID UPDATE', prevProps, prevState, this.state );
+            console.log( this.state.data );
+            Storage.setItem( 'fleet', this.state.data.reverse() );
         };
 
         // ------------------------------
@@ -28,24 +39,33 @@ function( React, _, FleetFilter, FleetList ) {
 
             return (
                 <div className="row">
-                    <FleetFilter data={ updatedData } />
+                    <FleetFilter />
 
                     <FleetList
                         data={ updatedData }
-                        updateData={ _.bind( $private.updateData, this ) } />
+                        onUpdateData={ _.bind( $private.handleUpdateData, this ) }
+                        onRemoveData={ _.bind( $private.handleRemoveData, this ) } />
                 </div>
             );
         };
 
         // ------------------------------
 
-        $private.updateData = function updateData( newVehicle ) {
+        $private.handleUpdateData = function handleUpdateData( newVehicle ) {
             var removeToUpdate = _.remove( this.state.data, function( data ) {
                 return data.placa === newVehicle.placa;
             });
 
             this.setState({
                 data: [].concat( newVehicle, this.state.data )
+            });
+        };
+
+        // ------------------------------
+
+        $private.handleRemoveData = function handleRemoveData( dataRemovedVehicle ) {
+            this.setState({
+                data: dataRemovedVehicle
             });
         };
 

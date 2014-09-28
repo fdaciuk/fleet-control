@@ -89,12 +89,12 @@ function( React, _ ) {
         $private.handleClickRemove = function handleClickRemove( e ) {
             e.preventDefault();
             var plate = e.currentTarget.getAttribute( 'data-plate' );
-            var newData = _.filter( this.props.data, function( item ) {
+            var newData = _.remove( this.props.data, function( item ) {
                 return item.placa !== plate;
             });
 
             console.log( 'Removed plate %s', plate, newData );
-            return newData;
+            return this.props.onRemoveItem( newData );
         };
 
         // ------------------------------

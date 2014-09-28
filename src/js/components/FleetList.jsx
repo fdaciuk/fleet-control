@@ -65,13 +65,13 @@ function( React, _, FleetAddNewButton, FleetForm, FleetListTable, FleetPaginatio
         // ------------------------------
 
         $private.handleAddNewVehicle = function handleAddNewVehicle( data ) {
-            this.props.updateData( data );
+            this.props.onUpdateData( data );
         };
 
         // ------------------------------
 
         $private.handleRemoveItem = function handleRemoveItem( data ) {
-
+            this.props.onRemoveData( data );
         };
 
         // ------------------------------

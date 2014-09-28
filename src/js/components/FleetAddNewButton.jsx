@@ -15,7 +15,7 @@ function( React ) {
         $public.render = function render() {
             return (
                 <div className="col-md-12">
-                    <a onClick={$private.handleClickShowHideForm.bind( this )} className="btn btn-success pull-right">
+                    <a onClick={ $private.handleClickShowHideForm.bind( this ) } className="btn btn-success pull-right">
                         <span className="glyphicon glyphicon-plus"></span>
                         &nbsp;Adicionar Veículo
                     </a>
