@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-Run the `index.html` file :)
+Download this repository and run the `index.html` file :)
 
 ## Start server
 
