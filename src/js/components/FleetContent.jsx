@@ -20,16 +20,14 @@ function( React, _, FleetFilter, FleetList, Storage ) {
 
         $public.getInitialState = function getInitialState() {
             return {
-                data: Storage.getItem( 'fleet' ).reverse()
+                data: Storage.getItem( 'fleet' )
             };
         };
 
         // ------------------------------
 
         $public.componentDidUpdate = function componentDidUpdate( prevProps, prevState ) {
-            // console.log( 'COMPONENT DID UPDATE', prevProps, prevState, this.state );
-            console.log( this.state.data );
-            Storage.setItem( 'fleet', this.state.data.reverse() );
+            Storage.setItem( 'fleet', this.state.data );
         };
 
         // ------------------------------
@@ -39,7 +37,7 @@ function( React, _, FleetFilter, FleetList, Storage ) {
 
             return (
                 <div className="row">
-                    <FleetFilter />
+                    {/*<FleetFilter data={ updatedData } />*/}
 
                     <FleetList
                         data={ updatedData }

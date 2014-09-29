@@ -14,16 +14,20 @@ function( React ) {
 
         $public.render = function render() {
             return (
-                <div className="btn-group" data-toggle="buttons">
-                    <label className="btn btn-info active">
-                        <input type="checkbox" checked /> Preto
-                    </label>
-                    <label className="btn btn-info">
-                        <input type="checkbox" /> Branco
-                    </label>
-                    <label className="btn btn-info">
-                        <input type="checkbox" /> Vermelho
-                    </label>
+                <div>
+                    <h4>Cor</h4>
+
+                    <div className="btn-group" data-toggle="buttons">
+                        <label className="btn btn-info active">
+                            <input type="checkbox" checked /> Preto
+                        </label>
+                        <label className="btn btn-info">
+                            <input type="checkbox" /> Branco
+                        </label>
+                        <label className="btn btn-info">
+                            <input type="checkbox" /> Vermelho
+                        </label>
+                    </div>
                 </div>
             );
         };

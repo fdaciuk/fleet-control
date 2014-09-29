@@ -20,7 +20,7 @@ function( React, _, FleetAddNewButton, FleetForm, FleetListTable, FleetPaginatio
         $public.getInitialState = function getInitialState() {
             return {
                 formShowOrHide : 'hide',
-                itemToEdit : ''
+                itemToEdit : {}
             };
         };
 
@@ -28,17 +28,17 @@ function( React, _, FleetAddNewButton, FleetForm, FleetListTable, FleetPaginatio
 
         $public.render = function render() {
             var formShowOrHide = this.state.formShowOrHide;
-            var itemEdit = this.state.itemEdit;
+            var itemToEdit = this.state.itemToEdit;
 
             return (
-                <div className="col-md-9">
+                <div className="col-md-12">
                     <FleetAddNewButton
                         formShowOrHide={ formShowOrHide }
                         onFormShowOrHide={ _.bind( $private.handleFormShowOrHide, this ) } />
 
                     <FleetForm
                         showOrHide={ formShowOrHide }
-                        itemToEdit={ itemEdit }
+                        itemToEdit={ itemToEdit }
                         onAddNewVehicle={ _.bind( $private.handleAddNewVehicle, this ) } />
 
                     <div className="col-md-12">
@@ -66,6 +66,16 @@ function( React, _, FleetAddNewButton, FleetForm, FleetListTable, FleetPaginatio
 
         $private.handleAddNewVehicle = function handleAddNewVehicle( data ) {
             this.props.onUpdateData( data );
+            this.setState({
+                itemToEdit : {
+                    imagem: '',
+                    marca: '',
+                    modelo: '',
+                    placa: '',
+                    cor: '',
+                    combustivel: ''
+                }
+            });
         };
 
         // ------------------------------
@@ -79,7 +89,7 @@ function( React, _, FleetAddNewButton, FleetForm, FleetListTable, FleetPaginatio
         $private.handleEditItem = function handleEditItem( item ) {
             this.setState({
                 formShowOrHide : '',
-                itemEdit : item[0]
+                itemToEdit : item[0]
             });
         };
 

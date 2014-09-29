@@ -2,10 +2,11 @@
 
 define([
     'react',
+    'lodash',
     'components/FleetFilterColor',
     'components/FleetFilterMark'
 ],
-function( React, FleetFilterColor, FleetFilterMark ) {
+function( React, _, FleetFilterColor, FleetFilterMark ) {
     'use strict';
 
     var FleetFilter = function() {
@@ -14,16 +15,50 @@ function( React, FleetFilterColor, FleetFilterMark ) {
 
         // ------------------------------
 
+        $public.getInitialState = function getInitialState() {
+            return {
+                filter : {
+                    mark : [],
+                    color: []
+                }
+            }
+        };
+
+        // ------------------------------
+
         $public.render = function render() {
+
             return (
                 <div className="col-md-3 well">
-                    <h4>Cor</h4>
-                    <FleetFilterColor />
+                    <FleetFilterColor
+                        data={ this.props.data }
+                        onSelectFilter={ $private.handleSelectFilter } />
 
-                    <h4>Marca</h4>
-                    <FleetFilterMark />
+                    <FleetFilterMark
+                        data={ this.props.data }
+                        filter={ this.state.filter.mark }
+                        onSelectFilter={ _.bind( $private.handleSelectFilter, this ) } />
+
                 </div>
             );
+        };
+
+        // ------------------------------
+
+        $private.handleSelectFilter = function handleSelectFilter( items ) {
+            var inputs = _.map( items, function( item ) {
+                return {
+                    name : item.getAttribute( 'data-name' ),
+                    checked: item.checked
+                }
+            });
+
+            console.log( 'INPUTS', inputs );
+            this.setState({
+                filter: {
+                    mark: inputs
+                }
+            });
         };
 
         // ------------------------------

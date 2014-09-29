@@ -152,16 +152,6 @@ function( React, _ ) {
             var fieldsAndValues = $private.getValue.call( this, fields );
             var newVehicle = $private.createNewVehicle( fieldsAndValues );
 
-
-            this.setState({
-                imagem: '',
-                marca: '',
-                modelo: '',
-                placa: '',
-                cor: '',
-                combustivel: ''
-            });
-
             this.props.onAddNewVehicle( newVehicle );
         };
 
@@ -181,12 +171,12 @@ function( React, _ ) {
 
         $private.createNewVehicle = function createNewVehicle( fieldsAndValues ) {
             return {
-                combustivel : fieldsAndValues.fuel,
                 imagem : fieldsAndValues.image,
                 marca : fieldsAndValues.mark,
                 modelo : fieldsAndValues.model,
                 placa : fieldsAndValues.plate,
-                cor : fieldsAndValues.color
+                cor : fieldsAndValues.color,
+                combustivel : fieldsAndValues.fuel
             };
         };
 

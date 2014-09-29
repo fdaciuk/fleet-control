@@ -1,6 +1,30 @@
-Fleet Control
+## Fleet Control
 
-Javascript system to control a car fleet.
+> Javascript system to control a Car Fleet, with ReactJS.
+
+## Getting Started
+
+Run the `index.html` file :)
+
+## Start server
+
+> You need to have installed NodeJS and GruntJS
+
+Inside `src/` directory, run the following command:
+
+```
+npm i
+```
+
+Climb up the server and watch JS files with the command:
+
+```
+gulp w
+```
+
+On your browser, go to: `http://localhost:8080`
+
+Have fun ;)
 
 ## License
 The MIT License
